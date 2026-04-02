@@ -1,0 +1,36 @@
+---
+// The astro component that contains the education data inline 
+in education data instead of importing from the data folder.
+---
+
+const education = [
+    {
+        institution: "University of Example",
+        degree: "Bachelor of Science in Example Studies",
+        startDate: "2015-09-01",
+        endDate: "2019-06-01",
+        url: "https://example.edu"
+    },
+    {
+        institution: "Example University",
+        degree: "Master of Science in Example Studies",
+        startDate: "2019-09-01",
+        endDate: "2021-06-01",
+        url: "https://example.edu"
+    }
+];
+
+---
+
+<template>
+    <section id="education">
+        <h2>Education</h2>
+        <ul>
+            {education.map(item => (
+                <li>
+                    <strong>{item.degree}</strong> at <a href={item.url}>{item.institution}</a> ({item.startDate} - {item.endDate})
+                </li>
+            ))}
+        </ul>
+    </section>
+</template>

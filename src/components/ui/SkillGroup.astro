@@ -1,0 +1,82 @@
+---
+import Icon from './Icon.astro';
+import type { SkillCategory } from '../../data/types';
+
+type Props = SkillCategory;
+const { category, skills } = Astro.props;
+---
+
+<div class="group">
+  <h3 class="category">{category}</h3>
+  <ul class="skills">
+    {skills.map(skill => (
+      <li class="skill">
+        <span class="skill-icon">
+          <Icon name={skill.iconSlug} size={22} />
+        </span>
+        <span class="skill-name">{skill.name}</span>
+      </li>
+    ))}
+  </ul>
+</div>
+
+<style>
+  .group {
+    background-color: var(--color-bg-card);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    padding: 1.75rem;
+    transition: box-shadow var(--transition-base);
+  }
+
+  .group:hover {
+    box-shadow: var(--shadow-card);
+  }
+
+  .category {
+    font-size: var(--text-sm);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--color-accent-1);
+    margin-bottom: 1.25rem;
+  }
+
+  .skills {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .skill {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.5rem 0.75rem;
+    border-radius: var(--radius-md);
+    transition: background-color var(--transition-base);
+  }
+
+  .skill:hover {
+    background-color: var(--color-bg-subtle);
+  }
+
+  .skill-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: var(--radius-md);
+    background-color: var(--color-bg-subtle);
+    color: var(--color-accent-1);
+    flex-shrink: 0;
+    border: 1px solid var(--color-border);
+  }
+
+  .skill-name {
+    font-size: var(--text-sm);
+    font-weight: 500;
+    color: var(--color-text);
+  }
+</style>

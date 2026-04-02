@@ -1,0 +1,113 @@
+---
+import TagBadge from './TagBadge.astro';
+
+interface Props {
+  title: string;
+  date: Date;
+  excerpt: string;
+  slug: string;
+  tags?: string[];
+}
+
+const { title, date, excerpt, slug, tags = [] } = Astro.props;
+
+const formattedDate = date.toLocaleDateString('en-US', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+});
+---
+
+<article>
+  <a href={`/blog/${slug}/`} class="card-link" aria-label={`Read: ${title}`}>
+    <div class="card">
+      <div class="meta">
+        <time datetime={date.toISOString()} class="date">{formattedDate}</time>
+        {tags.length > 0 && (
+          <div class="tags">
+            {tags.slice(0, 3).map(tag => (
+              <TagBadge label={tag} variant="accent" />
+            ))}
+          </div>
+        )}
+      </div>
+      <h3 class="title">{title}</h3>
+      <p class="excerpt">{excerpt}</p>
+      <span class="read-more">Read post →</span>
+    </div>
+  </a>
+</article>
+
+<style>
+  .card-link {
+    display: block;
+    text-decoration: none;
+  }
+
+  .card {
+    background-color: var(--color-bg-card);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    padding: 1.75rem;
+    height: 100%;
+    transition:
+      box-shadow var(--transition-base),
+      transform var(--transition-base),
+      border-color var(--transition-base);
+  }
+
+  .card:hover {
+    box-shadow: var(--shadow-card-hover);
+    transform: translateY(-3px);
+    border-color: var(--color-accent-1);
+  }
+
+  .meta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .date {
+    font-size: var(--text-sm);
+    color: var(--color-text-muted);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .tags {
+    display: flex;
+    gap: 0.35rem;
+    flex-wrap: wrap;
+  }
+
+  .title {
+    font-size: var(--text-xl);
+    margin-bottom: 0.6rem;
+    color: var(--color-text);
+    transition: color var(--transition-base);
+  }
+
+  .card:hover .title {
+    color: var(--color-accent-1);
+  }
+
+  .excerpt {
+    font-size: var(--text-sm);
+    color: var(--color-text-muted);
+    line-height: 1.7;
+    margin-bottom: 1.25rem;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .read-more {
+    font-size: var(--text-sm);
+    font-weight: 600;
+    color: var(--color-accent-1);
+  }
+</style>

@@ -1,0 +1,17 @@
+# Build output
+dist/
+
+# Node
+node_modules/
+
+# Astro generated types
+.astro/
+
+# Environment
+.env
+.env.*
+!.env.example
+
+# OS
+.DS_Store
+Thumbs.db

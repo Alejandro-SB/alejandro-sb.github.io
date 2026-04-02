@@ -1,0 +1,14 @@
+/* No-JS fallback: respects OS preference when localStorage hasn't been set */
+@media (prefers-color-scheme: dark) {
+  :root:not(.light) {
+    --color-bg:          #0F0F1A;
+    --color-bg-subtle:   #16162A;
+    --color-bg-card:     #1C1C2E;
+    --color-border:      #2A2A40;
+    --color-text:        #E8E8F0;
+    --color-text-muted:  #9CA3AF;
+    --color-nav-bg:      rgba(15, 15, 26, 0.88);
+    --shadow-card:       0 4px 24px rgba(0, 0, 0, 0.4);
+    --shadow-card-hover: 0 8px 40px rgba(108, 99, 255, 0.35);
+  }
+}

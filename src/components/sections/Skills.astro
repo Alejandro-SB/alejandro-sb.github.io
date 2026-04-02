@@ -1,0 +1,25 @@
+---
+import SkillGroup from '../ui/SkillGroup.astro';
+import { skillCategories } from '../../data/skills';
+---
+
+<section id="skills" class="section" style="background-color: var(--color-bg-subtle);">
+  <div class="container">
+    <h2 class="section-title">Skills</h2>
+    <p class="section-subtitle">Technologies I work with</p>
+
+    <div class="grid">
+      {skillCategories.map(cat => (
+        <SkillGroup {...cat} />
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1.5rem;
+  }
+</style>

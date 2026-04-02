@@ -1,0 +1,144 @@
+---
+import type { ExperienceItem } from '../../data/types';
+
+type Props = ExperienceItem;
+const { role, company, companyUrl, location, startDate, endDate, bullets } = Astro.props;
+---
+
+<div class="item">
+  <!-- Timeline dot -->
+  <div class="dot" aria-hidden="true"></div>
+
+  <div class="content">
+    <div class="header">
+      <div class="left">
+        <h3 class="role">{role}</h3>
+        <p class="company">
+          {companyUrl
+            ? <a href={companyUrl} target="_blank" rel="noopener noreferrer">{company}</a>
+            : company
+          }
+          {location && <span class="location"> · {location}</span>}
+        </p>
+      </div>
+      <span class="dates">{startDate} – {endDate}</span>
+    </div>
+
+    <ul class="bullets">
+      {bullets.map(bullet => <li>{bullet}</li>)}
+    </ul>
+  </div>
+</div>
+
+<style>
+  .item {
+    display: grid;
+    grid-template-columns: 20px 1fr;
+    gap: 0 1.5rem;
+    position: relative;
+  }
+
+  /* Vertical line connecting dots */
+  .item:not(:last-child)::before {
+    content: '';
+    position: absolute;
+    left: 9px;
+    top: 20px;
+    bottom: -24px;
+    width: 2px;
+    background: var(--color-border);
+  }
+
+  .dot {
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: var(--color-accent-gradient);
+    margin-top: 4px;
+    flex-shrink: 0;
+    box-shadow: 0 0 0 4px color-mix(in srgb, var(--color-accent-1) 15%, transparent);
+  }
+
+  .content {
+    background-color: var(--color-bg-card);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    transition: box-shadow var(--transition-base);
+  }
+
+  .content:hover {
+    box-shadow: var(--shadow-card);
+  }
+
+  .header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .role {
+    font-size: var(--text-lg);
+    font-weight: 700;
+    color: var(--color-text);
+  }
+
+  .company {
+    font-size: var(--text-sm);
+    color: var(--color-text-muted);
+    margin-top: 0.2rem;
+  }
+
+  .company a {
+    color: var(--color-accent-1);
+    font-weight: 500;
+    transition: opacity var(--transition-base);
+  }
+
+  .company a:hover {
+    opacity: 0.8;
+  }
+
+  .location {
+    color: var(--color-text-muted);
+  }
+
+  .dates {
+    font-size: var(--text-sm);
+    font-weight: 600;
+    color: var(--color-accent-1);
+    white-space: nowrap;
+    background-color: color-mix(in srgb, var(--color-accent-1) 10%, transparent);
+    padding: 0.2rem 0.7rem;
+    border-radius: var(--radius-full);
+    border: 1px solid color-mix(in srgb, var(--color-accent-1) 25%, transparent);
+  }
+
+  .bullets {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    list-style: none;
+  }
+
+  .bullets li {
+    font-size: var(--text-sm);
+    color: var(--color-text-muted);
+    line-height: 1.7;
+    padding-left: 1.1rem;
+    position: relative;
+  }
+
+  .bullets li::before {
+    content: '▸';
+    position: absolute;
+    left: 0;
+    color: var(--color-accent-1);
+    font-size: 0.7em;
+    top: 0.2em;
+  }
+</style>

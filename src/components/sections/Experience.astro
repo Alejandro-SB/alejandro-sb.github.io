@@ -1,0 +1,24 @@
+---
+import TimelineItem from '../ui/TimelineItem.astro';
+import { experience } from '../../data/experience';
+---
+
+<section id="experience" class="section">
+  <div class="container">
+    <h2 class="section-title">Experience</h2>
+    <p class="section-subtitle">Where I've worked and what I've built</p>
+
+    <div class="timeline">
+      {experience.map(item => (
+        <TimelineItem {...item} />
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .timeline {
+    max-width: 760px;
+    position: relative;
+  }
+</style>

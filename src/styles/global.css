@@ -1,0 +1,176 @@
+/* =========================================================
+   DESIGN TOKENS — Light mode (default)
+   ========================================================= */
+:root {
+  /* Accent palette */
+  --color-accent-1: #6C63FF;
+  --color-accent-2: #FF6584;
+  --color-accent-3: #43E97B;
+  --color-accent-gradient: linear-gradient(135deg, var(--color-accent-1), var(--color-accent-2));
+
+  /* Surfaces */
+  --color-bg: #FFFFFF;
+  --color-bg-subtle: #F5F5F7;
+  --color-bg-card: #FFFFFF;
+  --color-border: #E8E8ED;
+
+  /* Text */
+  --color-text: #1A1A2E;
+  --color-text-muted: #6B7280;
+  --color-text-on-accent: #FFFFFF;
+
+  /* Nav */
+  --color-nav-bg: rgba(255, 255, 255, 0.85);
+
+  /* Typography */
+  --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+  --font-display: 'Plus Jakarta Sans', var(--font-sans);
+
+  /* Type scale */
+  --text-xs:   0.75rem;
+  --text-sm:   0.875rem;
+  --text-base: 1rem;
+  --text-lg:   1.125rem;
+  --text-xl:   1.25rem;
+  --text-2xl:  1.5rem;
+  --text-3xl:  1.875rem;
+  --text-4xl:  2.25rem;
+  --text-5xl:  3rem;
+  --text-6xl:  3.75rem;
+
+  /* Spacing */
+  --space-section: 6rem;
+
+  /* Radius */
+  --radius-sm:   0.375rem;
+  --radius-md:   0.75rem;
+  --radius-lg:   1.25rem;
+  --radius-full: 9999px;
+
+  /* Shadow */
+  --shadow-card:       0 4px 24px rgba(0, 0, 0, 0.06);
+  --shadow-card-hover: 0 8px 40px rgba(108, 99, 255, 0.18);
+
+  /* Transition */
+  --transition-base: 200ms ease;
+  --transition-slow: 350ms ease;
+}
+
+/* =========================================================
+   DARK MODE — applied via <html class="dark">
+   ========================================================= */
+:root.dark {
+  --color-bg:          #0F0F1A;
+  --color-bg-subtle:   #16162A;
+  --color-bg-card:     #1C1C2E;
+  --color-border:      #2A2A40;
+  --color-text:        #E8E8F0;
+  --color-text-muted:  #9CA3AF;
+  --color-nav-bg:      rgba(15, 15, 26, 0.88);
+  --shadow-card:       0 4px 24px rgba(0, 0, 0, 0.4);
+  --shadow-card-hover: 0 8px 40px rgba(108, 99, 255, 0.35);
+}
+
+/* =========================================================
+   RESET
+   ========================================================= */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: var(--font-sans);
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  line-height: 1.6;
+  transition: background-color var(--transition-slow), color var(--transition-slow);
+}
+
+img, video {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+ul, ol {
+  list-style: none;
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  background: none;
+  font-family: inherit;
+}
+
+/* =========================================================
+   TYPOGRAPHY
+   ========================================================= */
+h1, h2, h3, h4 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+}
+
+/* =========================================================
+   LAYOUT UTILITIES
+   ========================================================= */
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+.section {
+  padding: var(--space-section) 0;
+  scroll-margin-top: 80px;
+}
+
+.section-title {
+  font-size: var(--text-3xl);
+  margin-bottom: 0.5rem;
+  position: relative;
+  display: inline-block;
+}
+
+.section-title::after {
+  content: '';
+  display: block;
+  height: 4px;
+  width: 60%;
+  margin-top: 0.4rem;
+  background: var(--color-accent-gradient);
+  border-radius: var(--radius-full);
+}
+
+.section-subtitle {
+  font-size: var(--text-lg);
+  color: var(--color-text-muted);
+  margin-bottom: 3rem;
+}
+
+/* =========================================================
+   FOCUS STYLES
+   ========================================================= */
+:focus-visible {
+  outline: 3px solid var(--color-accent-1);
+  outline-offset: 3px;
+  border-radius: var(--radius-sm);
+}

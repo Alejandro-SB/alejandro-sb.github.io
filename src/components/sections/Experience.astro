@@ -9,8 +9,8 @@ import { experience } from '../../data/experience';
     <p class="section-subtitle">Where I've worked and what I've built</p>
 
     <div class="timeline">
-      {experience.map(item => (
-        <TimelineItem {...item} />
+      {experience.map(({ location, ...item }) => (
+        <TimelineItem {...item} jobLocation={location} />
       ))}
     </div>
   </div>

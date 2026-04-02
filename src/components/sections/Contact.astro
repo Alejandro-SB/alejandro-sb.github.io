@@ -44,13 +44,13 @@ const contacts = [
           aria-label={contact.label}
         >
           <span class="icon-wrap">
-            <Icon name={contact.icon} size={28} />
+            <Icon iconName={contact.icon} size={28} />
           </span>
           <div>
             <p class="label">{contact.label}</p>
             <p class="desc">{contact.description}</p>
           </div>
-          <Icon name="arrow_right" size={18} class="arrow" />
+          <Icon iconName="arrow_right" size={18} class="arrow" />
         </a>
       ))}
     </div>

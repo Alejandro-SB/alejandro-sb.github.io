@@ -1,8 +1,12 @@
 ---
 import Icon from './Icon.astro';
-import type { SkillCategory } from '../../data/types';
+import type { Skill } from '../../data/types';
 
-type Props = SkillCategory;
+interface Props {
+  category: 'Languages' | 'Frameworks' | 'Tools';
+  skills: Skill[];
+}
+
 const { category, skills } = Astro.props;
 ---
 
@@ -12,7 +16,7 @@ const { category, skills } = Astro.props;
     {skills.map(skill => (
       <li class="skill">
         <span class="skill-icon">
-          <Icon name={skill.iconSlug} size={22} />
+          <Icon iconName={skill.iconSlug} size={22} />
         </span>
         <span class="skill-name">{skill.name}</span>
       </li>

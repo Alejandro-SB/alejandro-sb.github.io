@@ -1,12 +1,12 @@
 ---
 interface Props {
-  name: string;
+  iconName: string;
   size?: number;
   label?: string;
   class?: string;
 }
 
-const { name, size = 24, label, class: className } = Astro.props;
+const { iconName, size = 24, label, class: className } = Astro.props;
 
 // Inline SVG dictionary — uses currentColor for theme compatibility
 const icons: Record<string, string> = {
@@ -35,7 +35,7 @@ const icons: Record<string, string> = {
   aws: `<rect x="2" y="2" width="20" height="20" rx="3" fill="none"/><text x="12" y="16" text-anchor="middle" font-size="7" font-weight="bold" fill="currentColor" stroke="none">AWS</text>`,
 };
 
-const paths = icons[name] ?? icons['external-link'];
+const paths = icons[iconName] ?? icons['external-link'];
 ---
 
 <svg

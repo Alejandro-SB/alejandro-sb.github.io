@@ -1,8 +1,15 @@
 ---
-import type { ExperienceItem } from '../../data/types';
+interface Props {
+  role: string;
+  company: string;
+  companyUrl?: string;
+  jobLocation?: string;
+  startDate: string;
+  endDate: string;
+  bullets: string[];
+}
 
-type Props = ExperienceItem;
-const { role, company, companyUrl, location, startDate, endDate, bullets } = Astro.props;
+const { role, company, companyUrl, jobLocation, startDate, endDate, bullets } = Astro.props;
 ---
 
 <div class="item">
@@ -18,7 +25,7 @@ const { role, company, companyUrl, location, startDate, endDate, bullets } = Ast
             ? <a href={companyUrl} target="_blank" rel="noopener noreferrer">{company}</a>
             : company
           }
-          {location && <span class="location"> · {location}</span>}
+          {jobLocation && <span class="location"> · {jobLocation}</span>}
         </p>
       </div>
       <span class="dates">{startDate} – {endDate}</span>

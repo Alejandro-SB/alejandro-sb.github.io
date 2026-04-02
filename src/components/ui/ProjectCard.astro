@@ -1,9 +1,16 @@
 ---
 import TagBadge from './TagBadge.astro';
 import Icon from './Icon.astro';
-import type { Project } from '../../data/types';
 
-type Props = Project;
+interface Props {
+  title: string;
+  description: string;
+  tags: string[];
+  githubUrl?: string;
+  demoUrl?: string;
+  featured?: boolean;
+}
+
 const { title, description, tags, githubUrl, demoUrl, featured } = Astro.props;
 ---
 
@@ -17,12 +24,12 @@ const { title, description, tags, githubUrl, demoUrl, featured } = Astro.props;
       <div class="links">
         {githubUrl && (
           <a href={githubUrl} target="_blank" rel="noopener noreferrer" aria-label={`GitHub: ${title}`}>
-            <Icon name="github" size={18} />
+            <Icon iconName="github" size={18} />
           </a>
         )}
         {demoUrl && (
           <a href={demoUrl} target="_blank" rel="noopener noreferrer" aria-label={`Live demo: ${title}`}>
-            <Icon name="external-link" size={18} />
+            <Icon iconName="external-link" size={18} />
           </a>
         )}
       </div>

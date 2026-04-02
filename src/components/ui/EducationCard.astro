@@ -1,7 +1,15 @@
 ---
-import type { EducationItem } from '../../data/types';
+interface Props {
+  degree: string;
+  field: string;
+  institution: string;
+  institutionUrl?: string;
+  startYear: number;
+  endYear: number | 'Present';
+  gpa?: string;
+  highlights?: string[];
+}
 
-type Props = EducationItem;
 const { degree, field, institution, institutionUrl, startYear, endYear, gpa, highlights } = Astro.props;
 ---
 

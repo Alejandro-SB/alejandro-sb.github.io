@@ -1,0 +1,25 @@
+---
+import EducationCard from '../ui/EducationCard.astro';
+import { education } from '../../data/education';
+---
+
+<section id="education" class="section" style="background-color: var(--color-bg-subtle);">
+  <div class="container">
+    <h2 class="section-title">Education</h2>
+    <p class="section-subtitle">My academic background</p>
+
+    <div class="grid">
+      {education.map(item => (
+        <EducationCard {...item} />
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+    gap: 1.5rem;
+  }
+</style>

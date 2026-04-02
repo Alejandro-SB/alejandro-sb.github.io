@@ -1,0 +1,271 @@
+---
+import Button from '../ui/Button.astro';
+import Icon from '../ui/Icon.astro';
+import { site } from '../../data/site';
+---
+
+<section id="hero" class="hero">
+  <!-- Background decoration -->
+  <div class="hero-bg" aria-hidden="true">
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+    <div class="grid-pattern"></div>
+  </div>
+
+  <div class="container hero-inner">
+    <!-- Avatar -->
+    <div class="avatar animate-fade-in-up" style="animation-delay: 0s">
+      <div class="avatar-ring">
+        <div class="avatar-inner">
+          <span class="initials">{site.name.split(' ').map(n => n[0]).join('')}</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Text content -->
+    <div class="hero-text stagger">
+      <p class="greeting animate-fade-in-up">Hi, I'm</p>
+      <h1 class="name animate-fade-in-up">{site.name}</h1>
+      <p class="role animate-fade-in-up">{site.title}</p>
+      <p class="tagline animate-fade-in-up">{site.tagline}</p>
+
+      <!-- CTAs -->
+      <div class="cta-row animate-fade-in-up">
+        <Button href={site.githubUrl} target="_blank" variant="primary">
+          <Icon name="github" size={18} />
+          GitHub
+        </Button>
+        <Button href={site.linkedinUrl} target="_blank" variant="outline">
+          <Icon name="linkedin" size={18} />
+          LinkedIn
+        </Button>
+        <Button href={site.resumeUrl} download="resume.pdf" variant="outline">
+          <Icon name="download" size={18} />
+          Resume
+        </Button>
+      </div>
+
+      <!-- Social links -->
+      <div class="social-links animate-fade-in-up">
+        <a href={site.githubUrl} target="_blank" rel="noopener noreferrer" aria-label="GitHub profile">
+          <Icon name="github" size={20} />
+        </a>
+        <a href={site.linkedinUrl} target="_blank" rel="noopener noreferrer" aria-label="LinkedIn profile">
+          <Icon name="linkedin" size={20} />
+        </a>
+        <a href={`mailto:${site.email}`} aria-label="Send email">
+          <Icon name="mail" size={20} />
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scroll indicator -->
+  <div class="scroll-hint animate-fade-in" style="animation-delay: 1s" aria-hidden="true">
+    <div class="scroll-mouse">
+      <div class="scroll-wheel"></div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .hero {
+    position: relative;
+    min-height: 100svh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    padding: 6rem 0 4rem;
+  }
+
+  /* Background blobs */
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    overflow: hidden;
+  }
+
+  .blob {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(80px);
+    opacity: 0.18;
+  }
+
+  :global(:root.dark) .blob {
+    opacity: 0.12;
+  }
+
+  .blob-1 {
+    width: 500px;
+    height: 500px;
+    top: -100px;
+    left: -150px;
+    background: var(--color-accent-1);
+  }
+
+  .blob-2 {
+    width: 400px;
+    height: 400px;
+    bottom: -80px;
+    right: -100px;
+    background: var(--color-accent-2);
+  }
+
+  .grid-pattern {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(var(--color-border) 1px, transparent 1px),
+      linear-gradient(90deg, var(--color-border) 1px, transparent 1px);
+    background-size: 60px 60px;
+    opacity: 0.4;
+    mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black, transparent);
+  }
+
+  /* Inner layout */
+  .hero-inner {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 2rem;
+  }
+
+  /* Avatar */
+  .avatar-ring {
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+    padding: 3px;
+    background: var(--color-accent-gradient);
+  }
+
+  .avatar-inner {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background-color: var(--color-bg-subtle);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .initials {
+    font-family: var(--font-display);
+    font-size: var(--text-4xl);
+    font-weight: 800;
+    background: var(--color-accent-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* Text */
+  .hero-text {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .greeting {
+    font-size: var(--text-lg);
+    color: var(--color-text-muted);
+    font-weight: 500;
+  }
+
+  .name {
+    font-size: clamp(2.5rem, 8vw, var(--text-6xl));
+    font-weight: 800;
+    background: var(--color-accent-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    line-height: 1.1;
+  }
+
+  .role {
+    font-size: var(--text-2xl);
+    font-weight: 600;
+    color: var(--color-text);
+    letter-spacing: -0.01em;
+  }
+
+  .tagline {
+    font-size: var(--text-lg);
+    color: var(--color-text-muted);
+    max-width: 520px;
+    line-height: 1.7;
+    margin-top: 0.25rem;
+  }
+
+  .cta-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    justify-content: center;
+    margin-top: 1rem;
+  }
+
+  .social-links {
+    display: flex;
+    gap: 1rem;
+    margin-top: 0.5rem;
+  }
+
+  .social-links a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 42px;
+    height: 42px;
+    border-radius: var(--radius-md);
+    color: var(--color-text-muted);
+    border: 1px solid var(--color-border);
+    transition: color var(--transition-base), border-color var(--transition-base), transform var(--transition-base);
+  }
+
+  .social-links a:hover {
+    color: var(--color-accent-1);
+    border-color: var(--color-accent-1);
+    transform: translateY(-2px);
+  }
+
+  /* Scroll indicator */
+  .scroll-hint {
+    position: absolute;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .scroll-mouse {
+    width: 26px;
+    height: 40px;
+    border: 2px solid var(--color-border);
+    border-radius: 13px;
+    display: flex;
+    justify-content: center;
+    padding-top: 6px;
+  }
+
+  .scroll-wheel {
+    width: 4px;
+    height: 8px;
+    background-color: var(--color-accent-1);
+    border-radius: var(--radius-full);
+    animation: scrollWheel 2s ease infinite;
+  }
+
+  @keyframes scrollWheel {
+    0%   { transform: translateY(0); opacity: 1; }
+    80%  { transform: translateY(12px); opacity: 0; }
+    100% { transform: translateY(0); opacity: 0; }
+  }
+</style>

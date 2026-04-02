@@ -1,0 +1,88 @@
+---
+interface Props {
+  href: string;
+  variant?: 'primary' | 'outline' | 'ghost';
+  target?: '_blank' | '_self';
+  download?: string;
+  class?: string;
+}
+
+const {
+  href,
+  variant = 'primary',
+  target,
+  download,
+  class: className,
+} = Astro.props;
+
+const rel = target === '_blank' ? 'noopener noreferrer' : undefined;
+---
+
+<a
+  href={href}
+  target={target}
+  rel={rel}
+  download={download}
+  class={`btn btn--${variant} ${className ?? ''}`}
+>
+  <slot />
+</a>
+
+<style>
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.65rem 1.4rem;
+    border-radius: var(--radius-full);
+    font-size: var(--text-sm);
+    font-weight: 600;
+    letter-spacing: 0.01em;
+    transition: opacity var(--transition-base), box-shadow var(--transition-base), transform var(--transition-base);
+    white-space: nowrap;
+  }
+
+  .btn:hover {
+    opacity: 0.88;
+    transform: translateY(-1px);
+  }
+
+  .btn:active {
+    transform: translateY(0);
+  }
+
+  .btn--primary {
+    background: var(--color-accent-gradient);
+    color: var(--color-text-on-accent);
+    box-shadow: 0 4px 20px color-mix(in srgb, var(--color-accent-1) 35%, transparent);
+  }
+
+  .btn--primary:hover {
+    box-shadow: 0 6px 28px color-mix(in srgb, var(--color-accent-1) 50%, transparent);
+    opacity: 1;
+  }
+
+  .btn--outline {
+    background: transparent;
+    color: var(--color-text);
+    border: 2px solid var(--color-border);
+  }
+
+  .btn--outline:hover {
+    border-color: var(--color-accent-1);
+    color: var(--color-accent-1);
+    opacity: 1;
+  }
+
+  .btn--ghost {
+    background: transparent;
+    color: var(--color-text-muted);
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  .btn--ghost:hover {
+    color: var(--color-accent-1);
+    opacity: 1;
+  }
+</style>

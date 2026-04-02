@@ -1,0 +1,77 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import BlogCard from '../../components/ui/BlogCard.astro';
+
+const allPosts = await getCollection('blog', ({ data }) => !data.draft);
+const posts = allPosts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+---
+
+<BaseLayout
+  title="Blog"
+  description="Writing about software engineering, things I'm learning, and projects I'm working on."
+>
+  <div class="blog-wrapper">
+    <div class="container">
+      <header class="page-header">
+        <h1>Blog</h1>
+        <p>Thoughts on software engineering, tools, and side projects.</p>
+      </header>
+
+      {posts.length === 0 ? (
+        <div class="empty">
+          <p>No posts yet — check back soon!</p>
+        </div>
+      ) : (
+        <div class="grid">
+          {posts.map(post => (
+            <BlogCard
+              title={post.data.title}
+              date={post.data.pubDate}
+              excerpt={post.data.description}
+              slug={post.id}
+              tags={post.data.tags}
+            />
+          ))}
+        </div>
+      )}
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  .blog-wrapper {
+    padding: 5rem 0 6rem;
+  }
+
+  .page-header {
+    margin-bottom: 3rem;
+  }
+
+  .page-header h1 {
+    font-size: var(--text-4xl);
+    font-weight: 800;
+    background: var(--color-accent-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 0.5rem;
+  }
+
+  .page-header p {
+    font-size: var(--text-lg);
+    color: var(--color-text-muted);
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .empty {
+    text-align: center;
+    padding: 4rem 0;
+    color: var(--color-text-muted);
+  }
+</style>

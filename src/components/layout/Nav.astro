@@ -1,5 +1,6 @@
 ---
 import ThemeToggle from '../ThemeToggle.astro';
+import PaletteToggle from '../PaletteToggle.astro';
 
 const navLinks = [
   { href: '/#projects', label: 'Projects' },
@@ -27,6 +28,7 @@ const navLinks = [
     </ul>
 
     <div class="nav-actions">
+      <PaletteToggle />
       <ThemeToggle />
       <!-- Mobile hamburger toggle -->
       <button

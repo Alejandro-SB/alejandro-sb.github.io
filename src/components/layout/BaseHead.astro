@@ -49,7 +49,7 @@ const fullTitle = title === 'Home'
   rel="stylesheet"
 />
 
-<!-- Anti-FOUC: apply theme before first paint -->
+<!-- Anti-FOUC: apply theme and palette before first paint -->
 <script is:inline>
   (function () {
     const stored = localStorage.getItem('theme');
@@ -58,6 +58,10 @@ const fullTitle = title === 'Home'
       document.documentElement.classList.add('dark');
     } else if (stored === 'light') {
       document.documentElement.classList.add('light');
+    }
+    const palette = localStorage.getItem('palette');
+    if (palette && palette !== 'purple') {
+      document.documentElement.setAttribute('data-palette', palette);
     }
   })();
 </script>

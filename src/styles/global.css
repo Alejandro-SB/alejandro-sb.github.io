@@ -58,6 +58,58 @@
 }
 
 /* =========================================================
+   COLOR PALETTES — override accent colors via data-palette attribute
+   ========================================================= */
+
+/* Ocean: sky → indigo */
+[data-palette="ocean"] {
+  --color-accent-1: #0EA5E9;
+  --color-accent-2: #6366F1;
+  --color-accent-3: #38BDF8;
+  --shadow-card-hover: 0 8px 40px rgba(14, 165, 233, 0.18);
+}
+:root.dark[data-palette="ocean"],
+:root:not(.light)[data-palette="ocean"] {
+  --shadow-card-hover: 0 8px 40px rgba(14, 165, 233, 0.35);
+}
+
+/* Forest: emerald → blue */
+[data-palette="forest"] {
+  --color-accent-1: #10B981;
+  --color-accent-2: #3B82F6;
+  --color-accent-3: #34D399;
+  --shadow-card-hover: 0 8px 40px rgba(16, 185, 129, 0.18);
+}
+:root.dark[data-palette="forest"],
+:root:not(.light)[data-palette="forest"] {
+  --shadow-card-hover: 0 8px 40px rgba(16, 185, 129, 0.35);
+}
+
+/* Sunset: orange → red */
+[data-palette="sunset"] {
+  --color-accent-1: #F97316;
+  --color-accent-2: #EF4444;
+  --color-accent-3: #FBBF24;
+  --shadow-card-hover: 0 8px 40px rgba(249, 115, 22, 0.18);
+}
+:root.dark[data-palette="sunset"],
+:root:not(.light)[data-palette="sunset"] {
+  --shadow-card-hover: 0 8px 40px rgba(249, 115, 22, 0.35);
+}
+
+/* Rose: pink → rose */
+[data-palette="rose"] {
+  --color-accent-1: #EC4899;
+  --color-accent-2: #F43F5E;
+  --color-accent-3: #F9A8D4;
+  --shadow-card-hover: 0 8px 40px rgba(236, 72, 153, 0.18);
+}
+:root.dark[data-palette="rose"],
+:root:not(.light)[data-palette="rose"] {
+  --shadow-card-hover: 0 8px 40px rgba(236, 72, 153, 0.35);
+}
+
+/* =========================================================
    DARK MODE — applied via <html class="dark">
    ========================================================= */
 :root.dark {

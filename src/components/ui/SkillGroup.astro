@@ -1,26 +1,57 @@
 ---
-import Icon from './Icon.astro';
-import type { Skill } from '../../data/types';
+import Icon from "./Icon.astro";
+import type { Skill } from "../../data/types";
 
 interface Props {
-  category: 'Languages' | 'Frameworks' | 'Tools';
+  category: "Languages" | "Frameworks" | "Tools";
   skills: Skill[];
 }
 
 const { category, skills } = Astro.props;
+
+const slugImages: Record<string, string> = {
+  "C#": "/csharp.svg",
+  fsharp: "/fsharp.svg",
+  react: "/react.svg",
+  vue: "/vue.svg",
+  aws: "/aws.svg",
+  azure: "/azure.svg",
+  rust: "/rust.svg",
+  typescript: "/typescript.svg",
+  sql: "/sql.svg",
+  nodejs: "/nodejs.svg",
+  dotnet: "/dotnet.svg",
+  nuxt: "/nuxt.svg",
+  powershell: "/powershell.svg",
+  linux: "/linux.svg",
+  github: "/github.svg",
+  docker: "/docker.svg",
+  git: "/git.svg",
+  javascript: "/javascript.svg",
+};
 ---
 
 <div class="group">
   <h3 class="category">{category}</h3>
   <ul class="skills">
-    {skills.map(skill => (
-      <li class="skill">
-        <span class="skill-icon">
-          <Icon iconName={skill.iconSlug} size={22} />
-        </span>
-        <span class="skill-name">{skill.name}</span>
-      </li>
-    ))}
+    {
+      skills.map((skill) => (
+        <li class="skill">
+          <span class="skill-icon">
+            {slugImages[skill.iconSlug] ? (
+              <img
+                src={slugImages[skill.iconSlug]}
+                alt={skill.name}
+                class="skill-img"
+              />
+            ) : (
+              <Icon iconName={skill.iconSlug} size={22} />
+            )}
+          </span>
+          <span class="skill-name">{skill.name}</span>
+        </li>
+      ))
+    }
   </ul>
 </div>
 
@@ -76,6 +107,12 @@ const { category, skills } = Astro.props;
     color: var(--color-accent-1);
     flex-shrink: 0;
     border: 1px solid var(--color-border);
+  }
+
+  .skill-img {
+    width: auto;
+    height: 22px;
+    object-fit: contain;
   }
 
   .skill-name {

@@ -1,15 +1,34 @@
 ---
+import TechPill from './TechPill.astro';
+
 interface Props {
   role: string;
   company: string;
   companyUrl?: string;
   jobLocation?: string;
   startDate: string;
-  endDate: string;
+  endDate?: string;
   bullets: string[];
+  techStack?: string[];
 }
 
-const { role, company, companyUrl, jobLocation, startDate, endDate, bullets } = Astro.props;
+const {
+  role,
+  company,
+  companyUrl,
+  jobLocation,
+  startDate,
+  endDate,
+  bullets,
+  techStack,
+} = Astro.props;
+
+
+const formatDate = (date: string) =>
+  new Date(date).toLocaleDateString(undefined, {
+    month: "short",
+    year: "numeric",
+  });
 ---
 
 <div class="item">
@@ -21,19 +40,37 @@ const { role, company, companyUrl, jobLocation, startDate, endDate, bullets } = 
       <div class="left">
         <h3 class="role">{role}</h3>
         <p class="company">
-          {companyUrl
-            ? <a href={companyUrl} target="_blank" rel="noopener noreferrer">{company}</a>
-            : company
+          {
+            companyUrl ? (
+              <a href={companyUrl} target="_blank" rel="noopener noreferrer">
+                {company}
+              </a>
+            ) : (
+              company
+            )
           }
           {jobLocation && <span class="location"> · {jobLocation}</span>}
         </p>
       </div>
-      <span class="dates">{startDate} – {endDate}</span>
+      <span class="dates"
+        >{formatDate(startDate)}
+        {endDate ? ` - ${formatDate(endDate)}` : ""}</span
+      >
     </div>
 
     <ul class="bullets">
-      {bullets.map(bullet => <li>{bullet}</li>)}
+      {bullets.map((bullet) => <li>{bullet}</li>)}
     </ul>
+
+    {
+      techStack && techStack.length > 0 && (
+        <div class="tech-stack">
+          {techStack.map((tech) => (
+            <TechPill tech={tech} />
+          ))}
+        </div>
+      )
+    }
   </div>
 </div>
 
@@ -47,7 +84,7 @@ const { role, company, companyUrl, jobLocation, startDate, endDate, bullets } = 
 
   /* Vertical line connecting dots */
   .item:not(:last-child)::before {
-    content: '';
+    content: "";
     position: absolute;
     left: 9px;
     top: 20px;
@@ -63,7 +100,8 @@ const { role, company, companyUrl, jobLocation, startDate, endDate, bullets } = 
     background: var(--color-accent-gradient);
     margin-top: 4px;
     flex-shrink: 0;
-    box-shadow: 0 0 0 4px color-mix(in srgb, var(--color-accent-1) 15%, transparent);
+    box-shadow: 0 0 0 4px
+      color-mix(in srgb, var(--color-accent-1) 15%, transparent);
   }
 
   .content {
@@ -119,7 +157,11 @@ const { role, company, companyUrl, jobLocation, startDate, endDate, bullets } = 
     font-weight: 600;
     color: var(--color-accent-1);
     white-space: nowrap;
-    background-color: color-mix(in srgb, var(--color-accent-1) 10%, transparent);
+    background-color: color-mix(
+      in srgb,
+      var(--color-accent-1) 10%,
+      transparent
+    );
     padding: 0.2rem 0.7rem;
     border-radius: var(--radius-full);
     border: 1px solid color-mix(in srgb, var(--color-accent-1) 25%, transparent);
@@ -141,11 +183,22 @@ const { role, company, companyUrl, jobLocation, startDate, endDate, bullets } = 
   }
 
   .bullets li::before {
-    content: '▸';
+    content: "▸";
     position: absolute;
     left: 0;
     color: var(--color-accent-1);
     font-size: 0.7em;
     top: 0.2em;
   }
+
+  .tech-stack {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    margin-top: 1rem;
+    padding-top: 0.75rem;
+    border-top: 1px solid var(--color-border);
+  }
+
+
 </style>

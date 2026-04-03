@@ -5,20 +5,29 @@ interface Props {
   institution: string;
   institutionUrl?: string;
   startYear: number;
-  endYear: number | 'Present';
-  gpa?: string;
-  highlights?: string[];
+  endYear: number | "Present";
 }
 
-const { degree, field, institution, institutionUrl, startYear, endYear, gpa, highlights } = Astro.props;
+const { degree, field, institution, institutionUrl, startYear, endYear } =
+  Astro.props;
 ---
 
 <div class="card">
   <div class="card-top">
     <div class="icon-wrap" aria-hidden="true">
-      <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M22 10v6M2 10l10-5 10 5-10 5z"/>
-        <path d="M6 12v5c3 3 9 3 12 0v-5"/>
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="28"
+        height="28"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+        <path d="M22 10v6M2 10l10-5 10 5-10 5z"></path>
+        <path d="M6 12v5c3 3 9 3 12 0v-5"></path>
       </svg>
     </div>
     <div>
@@ -28,22 +37,20 @@ const { degree, field, institution, institutionUrl, startYear, endYear, gpa, hig
   </div>
 
   <p class="institution">
-    {institutionUrl
-      ? <a href={institutionUrl} target="_blank" rel="noopener noreferrer">{institution}</a>
-      : institution
+    {
+      institutionUrl ? (
+        <a href={institutionUrl} target="_blank" rel="noopener noreferrer">
+          {institution}
+        </a>
+      ) : (
+        institution
+      )
     }
   </p>
 
   <div class="meta">
     <span class="years">{startYear} – {endYear}</span>
-    {gpa && <span class="gpa">GPA: {gpa}</span>}
   </div>
-
-  {highlights && highlights.length > 0 && (
-    <ul class="highlights">
-      {highlights.map(h => <li>{h}</li>)}
-    </ul>
-  )}
 </div>
 
 <style>
@@ -54,11 +61,13 @@ const { degree, field, institution, institutionUrl, startYear, endYear, gpa, hig
     padding: 1.75rem;
     position: relative;
     overflow: hidden;
-    transition: box-shadow var(--transition-base), transform var(--transition-base);
+    transition:
+      box-shadow var(--transition-base),
+      transform var(--transition-base);
   }
 
   .card::before {
-    content: '';
+    content: "";
     position: absolute;
     top: 0;
     left: 0;
@@ -127,7 +136,8 @@ const { degree, field, institution, institutionUrl, startYear, endYear, gpa, hig
     margin-bottom: 1rem;
   }
 
-  .years, .gpa {
+  .years,
+  .gpa {
     font-size: var(--text-sm);
     font-weight: 600;
     color: var(--color-text-muted);
@@ -153,7 +163,7 @@ const { degree, field, institution, institutionUrl, startYear, endYear, gpa, hig
   }
 
   .highlights li::before {
-    content: '✓';
+    content: "✓";
     position: absolute;
     left: 0;
     color: var(--color-accent-3);

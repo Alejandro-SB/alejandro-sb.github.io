@@ -1,6 +1,6 @@
 ---
-import TimelineItem from '../ui/TimelineItem.astro';
-import { experience } from '../../data/experience';
+import TimelineItem from "../ui/TimelineItem.astro";
+import { experience } from "../../data/experience";
 ---
 
 <section id="experience" class="section">
@@ -9,9 +9,7 @@ import { experience } from '../../data/experience';
     <p class="section-subtitle">Where I've worked and what I've built</p>
 
     <div class="timeline">
-      {experience.map(({ location, ...item }) => (
-        <TimelineItem {...item} jobLocation={location} />
-      ))}
+      {experience.map((item) => <TimelineItem {...item} />)}
     </div>
   </div>
 </section>

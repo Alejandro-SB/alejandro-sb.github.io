@@ -1,17 +1,19 @@
 ---
-import EducationCard from '../ui/EducationCard.astro';
-import { education } from '../../data/education';
+import EducationCard from "../ui/EducationCard.astro";
+import { education } from "../../data/education";
 ---
 
-<section id="education" class="section" style="background-color: var(--color-bg-subtle);">
+<section
+  id="education"
+  class="section"
+  style="background-color: var(--color-bg-subtle);"
+>
   <div class="container">
     <h2 class="section-title">Education</h2>
     <p class="section-subtitle">My academic background</p>
 
     <div class="grid">
-      {education.map(item => (
-        <EducationCard {...item} />
-      ))}
+      {education.map((item) => <EducationCard {...item} />)}
     </div>
   </div>
 </section>

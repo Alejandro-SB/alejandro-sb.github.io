@@ -25,18 +25,36 @@ export interface Skill {
 }
 
 export interface SkillCategory {
-  category: 'Languages' | 'Frameworks' | 'Tools';
+  category: "Languages" | "Frameworks" | "Tools";
   skills: Skill[];
 }
+
+export type Tech =
+  | "C#"
+  | ".NET"
+  | "jQuery"
+  | "Vue"
+  | "React"
+  | "F#"
+  | "Rust"
+  | "Elixir"
+  | "TypeScript"
+  | "JavaScript"
+  | "KnockoutJS"
+  | "AWS"
+  | "SQL"
+  | "Azure"
+  | "Docker";
 
 export interface ExperienceItem {
   role: string;
   company: string;
   companyUrl?: string;
-  location?: string;
+  jobLocation?: string;
   startDate: string;
-  endDate: string;
+  endDate?: string;
   bullets: string[];
+  techStack: Tech[];
 }
 
 export interface EducationItem {
@@ -45,7 +63,7 @@ export interface EducationItem {
   institution: string;
   institutionUrl?: string;
   startYear: number;
-  endYear: number | 'Present';
+  endYear: number | "Present";
   gpa?: string;
   highlights?: string[];
 }

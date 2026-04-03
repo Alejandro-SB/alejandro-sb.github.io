@@ -1,36 +1,29 @@
-import type { Project } from './types';
+import type { Project } from "./types";
 
 export const projects: Project[] = [
   {
-    title: 'Project Alpha',
+    title: "Funzo",
     description:
-      'A full-stack web application that solves a real-world problem. Replace this with your actual project description — what it does, who it helps, and what makes it interesting.',
-    tags: ['TypeScript', 'React', 'Node.js', 'PostgreSQL'],
-    githubUrl: 'https://github.com/alejandro-sb/project-alpha',
-    demoUrl: 'https://example.com',
+      "Funzo is a fully featured library to use union types in C#. By default, it has the Result and Option types and source generators in order to have dedicated types for your business concepts.",
+    tags: ["C#"],
+    githubUrl: "https://github.com/alejandro-sb/funzo",
     featured: true,
   },
   {
-    title: 'CLI Toolkit',
+    title: "Sorse",
     description:
-      'A developer productivity tool built with Node.js that automates repetitive tasks. Published on npm with over X weekly downloads.',
-    tags: ['Node.js', 'TypeScript', 'CLI'],
-    githubUrl: 'https://github.com/alejandro-sb/cli-toolkit',
+      "Sorse is a little helper created just to use in Funzo. It allows you to define Source generated content with a fluent interface so you don't have to concatenate strings manually",
+    tags: ["C#"],
+    githubUrl: "https://github.com/alejandro-sb/Sorse",
     featured: true,
   },
   {
-    title: 'Open Source Contribution',
+    title: "Join PDF utility",
     description:
-      'Contributed a significant feature to a popular open source project, improving performance by X% for users with large datasets.',
-    tags: ['Open Source', 'Python', 'Performance'],
-    githubUrl: 'https://github.com/some-org/some-repo',
-  },
-  {
-    title: 'Side Project',
-    description:
-      'A weekend project exploring a new technology or solving a personal pain point. Describe the problem, your approach, and what you learned.',
-    tags: ['Rust', 'WebAssembly'],
-    githubUrl: 'https://github.com/alejandro-sb/side-project',
-    demoUrl: 'https://example.com/demo',
+      "Small and dirty utility created to join PDFs locally, without uploading documents to the internet. ",
+    tags: ["Vue", "TypeScript"],
+    githubUrl: "https://github.com/alejandro-sb/joinpdf",
+    demoUrl: "https://alejandro-sb.github.io/joinpdf/",
+    featured: true,
   },
 ];

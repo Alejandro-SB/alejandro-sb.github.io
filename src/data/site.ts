@@ -1,13 +1,14 @@
-import type { SiteConfig } from './types';
+import type { SiteConfig } from "./types";
 
 export const site: SiteConfig = {
-  name: 'Alejandro SB',
-  title: 'Software Engineer',
-  tagline: 'I build things for the web — fast, accessible, and well-crafted.',
-  email: 'hello@example.com',
-  githubUrl: 'https://github.com/alejandro-sb',
-  linkedinUrl: 'https://linkedin.com/in/alejandro-sb',
-  resumeUrl: '/resume.pdf',
-  ogImage: '/og-image.png',
-  siteDescription: 'Personal portfolio of Alejandro SB — Software Engineer specializing in building excellent digital experiences.',
+  name: "Alejandro Sánchez Bastida",
+  title: "Software Engineer",
+  tagline: "I build things for the web — fast, accessible, and well-crafted.",
+  email: "asb.bastida@gmail.com",
+  githubUrl: "https://github.com/alejandro-sb",
+  linkedinUrl: "https://www.linkedin.com/in/asbastida/",
+  resumeUrl: "/resume.pdf",
+  ogImage: "/og-image.png",
+  siteDescription:
+    "Personal portfolio of Alejandro — Software Engineer specializing in building excellent digital experiences.",
 };

@@ -1,5 +1,5 @@
 ---
-import TagBadge from './TagBadge.astro';
+import TechPill from './TechPill.astro';
 import Icon from './Icon.astro';
 
 interface Props {
@@ -38,7 +38,7 @@ const { title, description, tags, githubUrl, demoUrl, featured } = Astro.props;
     <p class="description">{description}</p>
 
     <div class="tags">
-      {tags.map(tag => <TagBadge label={tag} />)}
+      {tags.map(tag => <TechPill tech={tag} />)}
     </div>
   </div>
 </article>

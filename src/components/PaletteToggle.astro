@@ -1,0 +1,218 @@
+---
+const palettes = [
+  { id: 'purple', label: 'Purple', c1: '#6C63FF', c2: '#FF6584' },
+  { id: 'ocean',  label: 'Ocean',  c1: '#0EA5E9', c2: '#6366F1' },
+  { id: 'forest', label: 'Forest', c1: '#10B981', c2: '#3B82F6' },
+  { id: 'sunset', label: 'Sunset', c1: '#F97316', c2: '#EF4444' },
+  { id: 'rose',   label: 'Rose',   c1: '#EC4899', c2: '#F43F5E' },
+];
+---
+
+<div class="palette-picker" id="palette-picker">
+  <button
+    id="palette-btn"
+    class="palette-btn"
+    aria-label="Choose color palette"
+    aria-haspopup="true"
+    aria-expanded="false"
+    title="Choose color palette"
+  >
+    <!-- Paint palette icon -->
+    <svg
+      width="20"
+      height="20"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      aria-hidden="true"
+    >
+      <circle cx="13.5" cy="6.5" r=".5" fill="currentColor" stroke="none"/>
+      <circle cx="17.5" cy="10.5" r=".5" fill="currentColor" stroke="none"/>
+      <circle cx="8.5" cy="7.5" r=".5" fill="currentColor" stroke="none"/>
+      <circle cx="6.5" cy="12.5" r=".5" fill="currentColor" stroke="none"/>
+      <path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 0 1 1.668-1.668h1.996c3.051 0 5.555-2.503 5.555-5.554C21.965 6.012 17.461 2 12 2z"/>
+    </svg>
+  </button>
+
+  <div class="palette-dropdown" id="palette-dropdown" role="menu" aria-hidden="true">
+    <p class="dropdown-label">Color palette</p>
+    <div class="palette-list">
+      {palettes.map(p => (
+        <button
+          class="swatch"
+          data-palette-id={p.id}
+          title={p.label}
+          role="menuitem"
+          aria-label={`${p.label} palette`}
+          style={`--c1: ${p.c1}; --c2: ${p.c2};`}
+        >
+          <span class="swatch-preview"></span>
+          <span class="swatch-label">{p.label}</span>
+          <svg class="swatch-check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <polyline points="20 6 9 17 4 12"></polyline>
+          </svg>
+        </button>
+      ))}
+    </div>
+  </div>
+</div>
+
+<style>
+  .palette-picker {
+    position: relative;
+  }
+
+  .palette-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: var(--radius-md);
+    color: var(--color-text-muted);
+    transition:
+      color var(--transition-base),
+      background-color var(--transition-base);
+  }
+
+  .palette-btn:hover {
+    color: var(--color-text);
+    background-color: var(--color-bg-subtle);
+  }
+
+  .palette-dropdown {
+    display: none;
+    position: absolute;
+    top: calc(100% + 8px);
+    right: 0;
+    background-color: var(--color-bg-card);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    padding: 0.75rem;
+    box-shadow: var(--shadow-card);
+    z-index: 200;
+    min-width: 160px;
+    animation: fadeIn 150ms ease;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-4px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .palette-dropdown.open {
+    display: block;
+  }
+
+  .dropdown-label {
+    font-size: var(--text-xs);
+    font-weight: 600;
+    color: var(--color-text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    padding: 0 0.5rem 0.5rem;
+  }
+
+  .palette-list {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .swatch {
+    display: flex;
+    align-items: center;
+    gap: 0.625rem;
+    padding: 0.5rem 0.5rem;
+    border-radius: var(--radius-md);
+    width: 100%;
+    text-align: left;
+    transition: background-color var(--transition-base);
+  }
+
+  .swatch:hover {
+    background-color: var(--color-bg-subtle);
+  }
+
+  .swatch-preview {
+    width: 24px;
+    height: 24px;
+    border-radius: var(--radius-sm);
+    background: linear-gradient(135deg, var(--c1), var(--c2));
+    flex-shrink: 0;
+  }
+
+  .swatch-label {
+    font-size: var(--text-sm);
+    font-weight: 500;
+    color: var(--color-text);
+    flex: 1;
+  }
+
+  .swatch-check {
+    opacity: 0;
+    color: var(--color-accent-1);
+    flex-shrink: 0;
+    transition: opacity var(--transition-base);
+  }
+
+  .swatch.active .swatch-check {
+    opacity: 1;
+  }
+</style>
+
+<script>
+  const btn = document.getElementById('palette-btn');
+  const dropdown = document.getElementById('palette-dropdown');
+  const swatches = document.querySelectorAll<HTMLElement>('.swatch[data-palette-id]');
+
+  function getCurrentPalette(): string {
+    return document.documentElement.getAttribute('data-palette') || 'purple';
+  }
+
+  function applyPalette(id: string) {
+    if (id === 'purple') {
+      document.documentElement.removeAttribute('data-palette');
+    } else {
+      document.documentElement.setAttribute('data-palette', id);
+    }
+    localStorage.setItem('palette', id);
+    updateActive(id);
+  }
+
+  function updateActive(id: string) {
+    swatches.forEach(s => {
+      s.classList.toggle('active', s.getAttribute('data-palette-id') === id);
+    });
+  }
+
+  function closeDropdown() {
+    dropdown?.classList.remove('open');
+    btn?.setAttribute('aria-expanded', 'false');
+    dropdown?.setAttribute('aria-hidden', 'true');
+  }
+
+  // Set initial active state
+  updateActive(getCurrentPalette());
+
+  btn?.addEventListener('click', e => {
+    e.stopPropagation();
+    const isOpen = dropdown?.classList.toggle('open');
+    btn.setAttribute('aria-expanded', String(isOpen));
+    dropdown?.setAttribute('aria-hidden', String(!isOpen));
+  });
+
+  document.addEventListener('click', closeDropdown);
+
+  swatches.forEach(swatch => {
+    swatch.addEventListener('click', e => {
+      e.stopPropagation();
+      const id = swatch.getAttribute('data-palette-id');
+      if (id) applyPalette(id);
+      closeDropdown();
+    });
+  });
+</script>
